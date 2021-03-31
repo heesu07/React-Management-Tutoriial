@@ -2,15 +2,15 @@ import React from 'react';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-const Customer = ({customer}) => {
+const Customer = ({customer, image}) => {
 
   return(
     <>
       <TableRow>
         <TableCell>{customer.id}</TableCell>
-        <TableCell><img src={customer.image} alt="profile"/></TableCell>
+        <TableCell><img src={image} alt="profile"/></TableCell>
         <TableCell>{customer.name}</TableCell>
-        <TableCell>{customer.dob}</TableCell>
+        <TableCell>{customer.birthday}</TableCell>
         <TableCell>{customer.gender}</TableCell>
         <TableCell>{customer.job}</TableCell>
       </TableRow>

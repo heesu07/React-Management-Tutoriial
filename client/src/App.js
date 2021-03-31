@@ -34,14 +34,11 @@ function App(props) {
     return body;
   };
 
-  useEffect(() => {    
-    setTimeout(() => {
-      getData()
-      .then(res => setCustomers(res))
-      .catch(console.log);
-    }, 1000);
-    
-  }, [customers]);
+  useEffect(() => {
+    getData()
+    .then(res => setCustomers(res))
+    .catch(err =>console.log(err));
+  }, []);
 
   return (
     
@@ -60,7 +57,10 @@ function App(props) {
             </TableHead>
             <TableBody>
             {customers ? customers.map(customer =>
-              <Customer key={customer.id} customer={customer}/>  ) 
+              <Customer 
+                key={customer.id} 
+                image={customer.image}
+                customer={customer}/>  ) 
               : 
               <TableRow >
                 <TableCell colSpan="6" align="center">

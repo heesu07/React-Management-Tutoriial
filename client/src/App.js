@@ -8,15 +8,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import {withStyles} from '@material-ui/core/styles';
+import { CircularProgress, TableRow } from '@material-ui/core';
 
 const styles = theme => ({
   root:{
     width: '100%',
-    marginTop: theme.width * 3,
+    marginTop: theme.spacing(1, 'auto'),
     overflowX: 'auto',
   },
   table:{
     minWidth: 1080,
+  },
+  progress: {
+    margin: theme.spacing(1, 'auto')    
   }
 })
 
@@ -31,9 +35,12 @@ function App(props) {
   };
 
   useEffect(() => {    
-    getData()
-    .then(res => setCustomers(res))
-    .catch(console.log);
+    setTimeout(() => {
+      getData()
+      .then(res => setCustomers(res))
+      .catch(console.log);
+    }, 1000);
+    
   }, [customers]);
 
   return (
@@ -42,17 +49,26 @@ function App(props) {
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
-              <TableCell>ID</TableCell>
-              <TableCell>Profile</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>DOB</TableCell>
-              <TableCell>Gender</TableCell>
-              <TableCell>Job</TableCell>
+              <TableRow >
+                <TableCell>ID</TableCell>
+                <TableCell>Profile</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>DOB</TableCell>
+                <TableCell>Gender</TableCell>
+                <TableCell>Job</TableCell>
+              </TableRow>              
             </TableHead>
             <TableBody>
-            {customers && customers.map(customer =>
-              <Customer key={customer.id} customer={customer}/>
-                )}
+            {customers ? customers.map(customer =>
+              <Customer key={customer.id} customer={customer}/>  ) 
+              : 
+              <TableRow >
+                <TableCell colSpan="6" align="center">
+                <CircularProgress className={classes.progress} color="secondary"/>
+                  
+                </TableCell>
+              </TableRow>
+            }
             </TableBody>
           </Table>
           
